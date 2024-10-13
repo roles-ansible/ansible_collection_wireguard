@@ -1,0 +1,17 @@
+---
+- name: Create group for wireguardui
+  become: true
+  ansible.builtin.group:
+    name: "{{ wireguardui__group }}"
+    state: present
+
+- name: Add user for wireguardui with disabled password
+  become: true
+  ansible.builtin.user:
+    name: "{{ wireguardui__owner }}"
+    home: "{{ wireguardui__home }}"
+    group: "{{ wireguardui__group }}"
+    password: '!'
+    create_home: true
+    system: true
+    shell: '/bin/bash'

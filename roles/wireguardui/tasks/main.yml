@@ -11,3 +11,11 @@
 - name: Download wireguard-ui
   ansible.builtin.include_tasks:
     file: 'download.yml'
+
+- name: Create wireguard-ui config
+  ansible.builtin.include_tasks:
+    file: 'configure.yml'
+
+- name: Create systemd unit
+  ansible.builtin.include_tasks:
+    file: 'systemd.yml'

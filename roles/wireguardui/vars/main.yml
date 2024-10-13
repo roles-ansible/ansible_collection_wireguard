@@ -1,5 +1,7 @@
 ---
-wireguardui__dependencies: []
+wireguardui__dependencies:
+  - 'wireguard'
+  - 'wireguard-tools'
 
 wireguardui__full_executable_path: '/usr/local/bin/wireguard-ui'
 
@@ -13,5 +15,5 @@ wireguardui__go_arch_map:
 
 wireguardui__arch: "{{ wireguardui__go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
 
-packages__playbook_version_number: 3
+packages__playbook_version_number: 4
 packages__playbook_version_path: 'l3d.wireguard.wireguardui.version'

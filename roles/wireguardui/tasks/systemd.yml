@@ -1,0 +1,33 @@
+---
+- name: Make sure wireguard config exist
+  become: true
+  ansible.builtin.file:
+    path: '/etc/wireguard/wg0.conf'
+    state: 'touch'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+
+- name: Copy systemd units
+  become: true
+  ansible.builtin.template:
+    src: "templates/{{ item }}.j2"
+    dest: "/etc/systemd/system/{{ item }}"
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  with_items:
+    - 'wgui.path'
+    - 'wgui.service'
+  notify: "systemctl restart {{ item }}"
+
+- name: Run systemctl start wgui
+  become: true
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: true
+    state: 'started'
+    daemon_reload: true
+  with_items:
+    - 'wgui.path'
+    - 'wgui.service'

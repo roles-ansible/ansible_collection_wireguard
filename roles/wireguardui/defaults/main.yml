@@ -1,0 +1,5 @@
+---
+wireguardui__version: 'latest'
+
+# Optional perform simple Versionscheck
+submodules_versioncheck: false

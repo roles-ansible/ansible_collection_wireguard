@@ -1,0 +1,13 @@
+---
+- name: Run simple versionscheck (optional)
+  ansible.builtin.include_tasks:
+    file: 'versioncheck.yml'
+  when: submodules_versioncheck | bool
+
+- name: Set version for wireguard-ui
+  ansible.builtin.include_tasks:
+    file: 'set_version.yml'
+
+- name: Download wireguard-ui
+  ansible.builtin.include_tasks:
+    file: 'download.yml'

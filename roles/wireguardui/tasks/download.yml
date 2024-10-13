@@ -1,0 +1,46 @@
+---
+- name: Dependency block
+  block:
+    - name: Update apt cache
+      become: true
+      ansible.builtin.apt:
+        cache_valid_time: 3600
+        update_cache: true
+      register: _pre_update_apt_cache
+      until: _pre_update_apt_cache is succeeded
+      when:
+        - ansible_pkg_mgr == "apt"
+
+    - name: Install dependencies
+      become: true
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ wireguardui__dependencies }}"
+
+- name: Create temporary directory
+  become: true
+  ansible.builtin.tempfile:
+    state: directory
+    suffix: wireguardui
+  register: wireguardui__tmp
+  when: (not ansible_check_mode and (wireguardui__active_version.stdout[1:] != wireguardui__version_target))
+
+- name: Download wireguard-ui
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ wireguardui__dl_url }}/{{ wireguardui__filename }}"
+    checksum: "md5:{{ wireguardui__dl_url }}/{{ wireguardui__filename }}.md5"
+    dest: "{{ wireguardui__tmp.path }}/{{ wireguardui__filename }}"
+    mode: '0640'
+    owner: 'root'
+    group: 'root'
+  when: (not ansible_check_mode and (wireguardui__active_version.stdout[1:] != wireguardui__version_target))
+
+- name: Unarchive wireguardui
+  become: true
+  ansible.builtin.unarchive:
+    src: "{{ wireguardui__tmp.path }}/{{ wireguardui__filename }}"
+    dest: '/usr/local/bin'
+    remote_src: true
+  when: (not ansible_check_mode and (wireguardui__active_version.stdout[1:] != wireguardui__version_target))

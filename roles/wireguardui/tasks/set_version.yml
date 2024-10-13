@@ -1,0 +1,60 @@
+---
+- name: "Check wireguard-ui installed version"
+  ansible.builtin.shell: |
+    set -eo pipefail
+    {{ wireguardui__full_executable_path }} -wg-conf-template /dev/invalid | grep 'App Version' | cut -d ' ' -f 3
+  args:
+    executable: /bin/bash
+  register: wireguardui__active_version
+  changed_when: false
+  failed_when: false
+
+- name: Optionally print wireguardui__active_version
+  ansible.builtin.debug:
+    msg: "{{ wireguardui__active_version.stdout }}"
+    verbosity: 1
+
+- name: "Determine 'latest' version release"
+  when: wireguardui__version == "latest"
+  block:
+    - name: "Get latest gitea release metadata"
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/ngoduykhanh/wireguard-ui/releases/latest
+        return_content: true
+      register: wiregardui__remote_metadata
+      become: false
+      when: not ansible_check_mode
+
+    - name: "Fail if running in check mode without versions set."
+      ansible.builtin.fail:
+        msg: |
+          "You are running this playbook in check mode:
+          Please set the wireguard-ui version with the variable 'wireguardui__version', because the URI module cannot detect the latest version in this mode."
+      when: ansible_check_mode and (wireguardui__version == 'latest')
+
+    - name: "Set fact latest wireguard-ui release"
+      ansible.builtin.set_fact:
+        wireguardui__remote_version: "{{ wiregardui__remote_metadata.json.tag_name[1:] }}"
+      when: not ansible_check_mode
+
+    - name: "Set wireguard-ui version target (latest)"
+      ansible.builtin.set_fact:
+        wireguardui__version_target: "{{ wireguardui__remote_version }}"
+      when: not ansible_check_mode
+
+- name: "Set wireguard-ui version target {{ wireguardui__version }}"
+  ansible.builtin.set_fact:
+    wireguardui__version_target: "{{ wireguardui__version }}"
+  when: wireguardui__version != "latest"
+
+- name: 'Assert that remote version is higher'
+  ansible.builtin.assert:
+    that:
+      - wireguardui__active_version is version(wireguardui__remote_version, 'lt')
+    fail_msg: ERROR - Remote version is lower then current version!
+  when: wireguardui__version == "latest" and wireguardui__active_version.stderr == "" | bool
+
+- name: "Generate gitea download URL"
+  ansible.builtin.set_fact:
+    wireguardui__dl_url: "https://github.com/ngoduykhanh/wireguard-ui/releases/download/v{{ wireguardui__version_target }}"
+    wireguardui__filename: "wireguard-ui-v{{ wireguardui__version_target }}-linux-{{ wireguardui__arch }}.tar.gz"

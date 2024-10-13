@@ -1,0 +1,17 @@
+---
+wireguardui__dependencies: []
+
+wireguardui__full_executable_path: '/usr/local/bin/wireguard-ui'
+
+wireguardui__go_arch_map:
+  i386: '386'
+  x86_64: 'amd64'
+  aarch64: 'arm64'
+  armv7l: 'arm'
+  armv6l: 'arm'
+  armv5l: 'arm'
+
+wireguardui__arch: "{{ wireguardui__go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+
+packages__playbook_version_number: 3
+packages__playbook_version_path: 'l3d.wireguard.wireguardui.version'

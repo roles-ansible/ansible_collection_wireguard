@@ -1,5 +1,8 @@
 ---
 wireguardui__version: 'latest'
+wireguardui__wg_interface: 'wg0'
+wireguardui__ipv4_forward: true
+wireguardui__ipv6_forward: true
 
 # Optional perform simple Versionscheck
 submodules_versioncheck: false

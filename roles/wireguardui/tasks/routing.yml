@@ -1,0 +1,22 @@
+---
+- name: Set IPv4 Forwarding
+  become: true
+  ansible.posix.sysctl:
+    name: "net.ipv4.conf.{{ wireguardui__wg_interface }}.forwarding"
+    value: '1'
+    sysctl_set: true
+    state: present
+    reload: true
+  when: wireguardui__ipv4_forward | bool
+  notify: "systemctl restart wireguard-ui.service"
+
+- name: Set IPv6 Forwarding
+  become: true
+  ansible.posix.sysctl:
+    name: "net.ipv6.conf.{{ wireguardui__wg_interface }}.forwarding"
+    value: '1'
+    sysctl_set: true
+    state: present
+    reload: true
+  when: wireguardui__ipv6_forward | bool
+  notify: "systemctl restart wireguard-ui.service"

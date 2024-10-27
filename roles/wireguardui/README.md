@@ -13,10 +13,13 @@ Visit [github.com/ngoduykhanh/wireguard-ui](https://github.com/ngoduykhanh/wireg
  Variables
 -----------
 
-| Variable                    | Value      | Description                                                  |
-| --------------------------- | ---------- | ------------------------------------------------------------ |
-| ``wireguardui__version``    | ``latest`` | Wireguard version to install - ``latest`` for newest release |
-| ``submodules_versioncheck`` | ``false``  | optional simple version check                                |
+| Variable                      | Value      | Description                                                  |
+| ----------------------------- | ---------- | ------------------------------------------------------------ |
+| ``wireguardui__version``      | ``latest`` | Wireguard version to install - ``latest`` for newest release |
+| ``wireguardui__wg_interface`` | ``wg0``    | Interface for ip forwarding rule                             |
+| ``wireguardui__ipv4_forward`` | ``true``   | set ``net.ipv4.conf.wg0.forwarding``                         |
+| ``wireguardui__ipv6_forward`` | ``true``   | set ``net.ipv6.conf.wg0.forwarding``                         |
+| ``submodules_versioncheck``   | ``false``  | optional simple version check                                |
 
  Contribution
 --------------

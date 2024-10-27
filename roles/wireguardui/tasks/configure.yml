@@ -1,4 +1,14 @@
 ---
+- name: Create /etc/wireguard-ui.conf config
+  become: true
+  ansible.builtin.template:
+    src: 'templates/wireguard-ui.conf.j2'
+    dest: '/etc/wireguard-ui.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0640'
+  notify: "systemctl restart wireguard-ui.service"
+
 - name: Create wireguard-ui systemd service
   become: true
   ansible.builtin.template:

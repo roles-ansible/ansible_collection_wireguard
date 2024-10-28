@@ -6,6 +6,7 @@
     name: 'wgui.path'
     enabled: true
     state: 'restarted'
+  notify: "systemctl restart wireguard-ui.service"
 
 - name: Run systemctl restart wgui.service
   listen: 'systemctl restart wgui.service'
@@ -14,6 +15,7 @@
     name: 'wgui.service'
     enabled: true
     state: 'restarted'
+  notify: "systemctl restart wireguard-ui.service"
 
 - name: Run systemctl restart wireguard-ui.service
   listen: 'systemctl restart wireguard-ui.service'

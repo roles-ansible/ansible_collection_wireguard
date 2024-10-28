@@ -4,8 +4,9 @@ Description=Wireguard-ui Service
 After=network.target
 
 [Service]
-Type=oneshot
+Type=simple
 ExecStart={{ wireguardui__full_executable_path }}
+EnvironmentFile=/etc/wireguard-ui.conf
 User=root
 Group=root
 

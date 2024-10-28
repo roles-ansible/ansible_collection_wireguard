@@ -15,3 +15,4 @@
     create_home: true
     system: true
     shell: '/bin/bash'
+  notify: "systemctl restart wireguard-ui.service"

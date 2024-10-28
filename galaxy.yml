@@ -42,6 +42,7 @@ tags:
 # range specifiers can be set and are separated by ','
 dependencies:
   "community.general": ">=9.5.0,<11.0.0"
+  "ansible.posix": ">=1.5.4,<2.0.0"
 
 # The URL of the originating SCM repository
 repository: https://github.com/roles-ansible/ansible_collection_wireguard.git

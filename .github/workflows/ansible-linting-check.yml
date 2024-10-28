@@ -20,4 +20,4 @@ jobs:
         uses: ansible-actions/ansible-lint-action@v1.0.3
         with:
           target: "./"
-          required_collections: 'ansible.posix ansible.posix'
+          required_collections: 'ansible.posix'

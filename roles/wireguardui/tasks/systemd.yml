@@ -7,6 +7,9 @@
     owner: 'root'
     group: 'root'
     mode: '0644'
+    modification_time: preserve
+    access_time: preserve
+  notify: "systemctl restart wireguard-ui.service"
 
 - name: Copy systemd units
   become: true
@@ -31,3 +34,4 @@
   with_items:
     - 'wgui.path'
     - 'wgui.service'
+  changed_when: false

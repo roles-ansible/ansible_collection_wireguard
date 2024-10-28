@@ -1,2 +1,6 @@
 {{ ansible_managed | comment }}
-BIND_ADDRESS="127.0.0.1:5000"
+BIND_ADDRESS="{{ wireguardui__conf_bind }}"
+WGUI_SERVER_INTERFACE_ADDRESSES="{{ wireguardui__conf_int_address }}"
+WGUI_SERVER_LISTEN_PORT="{{ wireguardui__conf_int_port }}"
+WGUI_DEFAULT_CLIENT_ALLOWED_IPS="{{ wireguardui__conf_allowed_ips }}"
+WGUI_ENDPOINT_ADDRESS="{{ wireguardui__conf_endpoint_ip }}"

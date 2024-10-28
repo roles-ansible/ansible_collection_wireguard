@@ -33,7 +33,9 @@ license:
 # requirements as 'namespace' and 'name'
 tags:
   - wireguard
-  - wireguard-ui
+  - wireguardui
+  - vpn
+  - network
   - linux
 
 # Collections that this collection requires to be installed for it to be usable. The key of the dict is the

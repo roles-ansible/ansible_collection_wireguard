@@ -20,3 +20,28 @@
     reload: true
   when: wireguardui__ipv6_forward | bool
   notify: "systemctl restart wireguard-ui.service"
+
+- name: Set IPv6 Forwarding for all
+  become: true
+  ansible.posix.sysctl:
+    name: "net.ipv6.conf.all.forwarding"
+    value: '1'
+    sysctl_set: true
+    state: present
+    reload: true
+  when:
+    - wireguardui__ipv6_forward | bool
+    - wireguardui__ipv6_all | bool
+  notify: "systemctl restart wireguard-ui.service"
+
+- name: Set IPv6 No Forwarding
+  become: true
+  ansible.posix.sysctl:
+    name: "net.ipv6.conf.{{ item }}.forwarding"
+    value: '1'
+    sysctl_set: true
+    state: present
+    reload: true
+  loop: "{{ wireguardui__ipv6_no_forward_interfaces }}"
+  when: wireguardui__ipv6_forward | bool
+  notify: "systemctl restart wireguard-ui.service"

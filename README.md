@@ -13,7 +13,7 @@ This is the Ansible Collection ``l3d.wireguard``. A collection to to install wir
 ## Using this Collection
 You can install the collection using ansible-galaxy by running:
 ```bash
-ansible-galaxy collection install l3d.wireguard:1.0.0
+ansible-galaxy collection install l3d.wireguard:1.0.1
 ```
 
 Remember you can to Upgrade to the latest version of the l3d.wireguard collection using the ``--upgrade`` parameter:
@@ -42,7 +42,7 @@ You can also list a collection in ``requirements.yml``:
 ---
 collections:
   - name: l3d.wireguard
-    version: ">=1.0.0"
+    version: ">=1.0.1"
 ```
 
 ## Example Playbook

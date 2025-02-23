@@ -55,7 +55,7 @@ Example Playbook using the l3d.wireguard.wireguardui role:
   roles:
     - {role: l3d.wireguard.wireguardui, tags: wireguardui}
   vars:
-    wireguardui__conf_int_address: '10.42.42.0/24,fd42:1337:4223::/48'
+    wireguardui__conf_int_address: ['10.42.42.0/24', 'fd42:1337:4223::/48']
 ```
 
 ## Requirements

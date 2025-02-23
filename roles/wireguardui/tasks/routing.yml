@@ -45,4 +45,3 @@
   loop: "{{ wireguardui__ipv6_no_forward_interfaces }}"
   when: wireguardui__ipv6_forward | bool
   notify: "systemctl restart wireguard-ui.service"
-

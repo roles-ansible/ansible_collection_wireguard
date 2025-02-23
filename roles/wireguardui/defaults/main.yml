@@ -3,7 +3,7 @@ wireguardui__version: 'latest'
 
 # config
 wireguardui__conf_bind: '127.0.0.1:5000'
-wireguardui__conf_int_address: '10.23.42.0/24'
+wireguardui__conf_int_address: ['10.23.42.0/24']
 wireguardui__conf_int_port: '51820'
 wireguardui__conf_allowed_ips: "{{ wireguardui__conf_int_address }}"
 wireguardui__conf_endpoint_ip: "{{ ansible_default_ipv4.address }}"

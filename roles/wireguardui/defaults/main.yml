@@ -10,8 +10,10 @@ wireguardui__conf_endpoint_ip: "{{ ansible_default_ipv4.address }}"
 
 # network
 wireguardui__wg_interface: 'wg0'
-wireguardui__ipv4_forward: true
-wireguardui__ipv6_forward: true
+wireguardui__ipv4_forward: false
+wireguardui__ipv4_all_forward: true
+wireguardui__ipv6_forward: false
+wireguardui__ipv6_all_forward: true
 wireguardui__ipv6_all: true
 wireguardui__ipv6_no_forward_interfaces: ['default']
 

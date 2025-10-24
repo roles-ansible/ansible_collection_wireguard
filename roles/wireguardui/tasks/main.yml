@@ -25,4 +25,6 @@
     file: 'routing.yml'
   when:
     - wireguardui__ipv4_forward | bool
+    - wireguardui__ipv4_all_forward | bool
+    - wireguardui__ipv6_all_forward | bool
     - wireguardui__ipv6_forward | bool

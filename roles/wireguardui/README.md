@@ -22,8 +22,10 @@ Visit [github.com/ngoduykhanh/wireguard-ui](https://github.com/ngoduykhanh/wireg
 | ``wireguardui__conf_allowed_ips`` | ``wireguardui__conf_int_address`` | List of allowed wireguard IP addresses                       |
 | ``wireguardui__conf_endpoint_ip`` | ``ansible_default_ipv4.address``  | Wireguard endpoint ip                                        |
 | ``wireguardui__wg_interface``     | ``wg0``                           | Interface for ip forwarding rule                             |
-| ``wireguardui__ipv4_forward``     | ``true``                          | set ``net.ipv4.conf.wg0.forwarding``                         |
-| ``wireguardui__ipv6_forward``     | ``true``                          | set ``net.ipv6.conf.wg0.forwarding``                         |
+| ``wireguardui__ipv4_all_forward`` | ``true``                          | set ``net.ipv4.ip_forward``                                  |
+| ``wireguardui__ipv4_forward``     | ``false``                         | set ``net.ipv4.conf.wg0.forwarding``                         |
+| ``wireguardui__ipv6_all_forward`` | ``true``                          | set ``net.ipv6.conf.all.forwarding``                         |
+| ``wireguardui__ipv6_forward``     | ``false``                         | set ``net.ipv6.conf.wg0.forwarding``                         |
 | ``wireguardui__ipv6_all``         | ``true``                          | set ``net.ipv6.conf.all.forwarding``                         |
 | ``wireguardui__ipv6_no_forward_interfaces`` | ``['default']``         | unset ``net.ipv6.conf.$interface.forwarding``                |
 | ``submodules_versioncheck``       | ``false``                         | optional simple version check                                |

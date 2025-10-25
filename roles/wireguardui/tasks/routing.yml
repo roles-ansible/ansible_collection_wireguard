@@ -1,9 +1,10 @@
 ---
-- name: Set all IPv4 Forwarding
+- name: Set IPv4 Forwarding
   become: true
   ansible.posix.sysctl:
     name: "net.ipv4.ip_forward"
     value: '1'
+    sysctl_file: '/etc/sysctl.d/sysctl.conf'
     sysctl_set: true
     state: present
     reload: true
@@ -15,6 +16,7 @@
   ansible.posix.sysctl:
     name: "net.ipv6.conf.all.forwarding"
     value: '1'
+    sysctl_file: '/etc/sysctl.d/sysctl.conf'
     sysctl_set: true
     state: present
     reload: true
@@ -26,6 +28,7 @@
   ansible.posix.sysctl:
     name: "net.ipv4.conf.{{ wireguardui__wg_interface }}.forwarding"
     value: '1'
+    sysctl_file: '/etc/sysctl.d/sysctl.conf'
     sysctl_set: true
     state: present
     reload: true
@@ -37,6 +40,7 @@
   ansible.posix.sysctl:
     name: "net.ipv6.conf.{{ wireguardui__wg_interface }}.forwarding"
     value: '1'
+    sysctl_file: '/etc/sysctl.d/sysctl.conf'
     sysctl_set: true
     state: present
     reload: true
@@ -48,6 +52,7 @@
   ansible.posix.sysctl:
     name: "net.ipv6.conf.all.forwarding"
     value: '1'
+    sysctl_file: '/etc/sysctl.d/sysctl.conf'
     sysctl_set: true
     state: present
     reload: true
@@ -61,6 +66,7 @@
   ansible.posix.sysctl:
     name: "net.ipv6.conf.{{ item }}.forwarding"
     value: '1'
+    sysctl_file: '/etc/sysctl.d/sysctl.conf'
     sysctl_set: true
     state: present
     reload: true

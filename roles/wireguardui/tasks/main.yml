@@ -23,6 +23,3 @@
 - name: Enable IP Forward
   ansible.builtin.include_tasks:
     file: 'routing.yml'
-  when:
-    - wireguardui__ipv4_forward | bool
-    - wireguardui__ipv6_forward | bool
